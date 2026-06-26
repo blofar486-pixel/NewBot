@@ -1,4 +1,3 @@
-import os
 import random
 import logging
 from datetime import datetime, timedelta
@@ -6,10 +5,12 @@ import pytz
 import telebot
 from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-# AWS Monitoring Logs
+# AWS/Railway Live Logs Monitoring
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
+# ⚠️ YAHAN APNA ASAL TELEGRAM TOKEN DIRECT PASTE KAREIN
+BOT_TOKEN = "YAHAN_APNA_TELEGRAM_TOKEN_PASTE_KAREIN" 
+
 bot = telebot.TeleBot(BOT_TOKEN)
 PK_TZ = pytz.timezone('Asia/Karachi')
 
@@ -23,6 +24,7 @@ PAIRS_CATEGORIES = {
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
+    print(f"🟢 Start command received from Chat ID: {message.chat.id}") # Yeh log check karne ke liye hai
     markup = InlineKeyboardMarkup(row_width=2)
     markup.add(
         InlineKeyboardButton("🌐 Forex Majors", callback_data="c_majors"),
@@ -31,7 +33,7 @@ def send_welcome(message):
         InlineKeyboardButton("🇦🇺 Minor Crosses", callback_data="c_cross"),
         InlineKeyboardButton("📊 Exotics", callback_data="c_exotics")
     )
-    bot.reply_to(message, "📊 **RQT Future Signal Generator V3.0 (AWS Ultra-Fast)**\n\nKisi aik category par click karke pairs load karein:", reply_markup=markup, parse_mode="Markdown")
+    bot.reply_to(message, "📊 **RQT Future Signal Generator V3.0**\n\nKisi aik category par click karke pairs load karein:", reply_markup=markup, parse_mode="Markdown")
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('c_'))
 def handle_category(call):
@@ -98,7 +100,7 @@ def back_main(call):
         InlineKeyboardButton("🇦🇺 Minor Crosses", callback_data="c_cross"),
         InlineKeyboardButton("📊 Exotics", callback_data="c_exotics")
     )
-    bot.edit_message_text("📊 **RQT Future Signal Generator V3.0 (AWS Ultra-Fast)**\n\nKisi aik category par click karke pairs load karein:", call.message.chat.id, call.message.message_id, reply_markup=markup, parse_mode="Markdown")
+    bot.edit_message_text("📊 **RQT Future Signal Generator V3.0**\n\nKisi aik category par click karke pairs load karein:", call.message.chat.id, call.message.message_id, reply_markup=markup, parse_mode="Markdown")
 
-print("🚀 Telebot Engine Started Successfully on AWS...")
+print("🚀 Telebot Engine Main Loop Started...")
 bot.infinity_polling()
