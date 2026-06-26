@@ -9,7 +9,7 @@ from telebot.types import InlineKeyboardButton, InlineKeyboardMarkup
 logging.basicConfig(level=logging.INFO)
 
 # ⚠️ YAHAN APNA ASAL TELEGRAM TOKEN DIRECT PASTE KAREIN
-BOT_TOKEN = "YAHAN_APNA_TELEGRAM_TOKEN_PASTE_KAREIN" 
+BOT_TOKEN = "8328605174:AAFeNEZR2BfW3i21BywTVeuDL-Oopo562gA" 
 
 bot = telebot.TeleBot(BOT_TOKEN)
 PK_TZ = pytz.timezone('Asia/Karachi')
